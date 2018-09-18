@@ -146,10 +146,20 @@ def tages(x):
     q = fool.analysis(x)
     s =[i[3] for i in q[1][0] if i[2] == 'company']
 
-    if re.findall('央|行|证券|德普|吉恩|期货|酒|美联社|路透社|伊朗|普京|律师|基金|白马股|代写投标书[a-zA-Z]\*[\xa0\u3000][\w{2,4}公司]',str(s)):
-        return None
-    elif re.findall('[\w{2,4}公司]',str(s)) and len(set(s))>2<6:
-        return set(s)
+    #if re.findall('央|行|证券|德普|吉恩|期货|酒|美联社|路透社|伊朗|普京|律师|基金|白马股|代写投标书|[a-zA-Z]|\*|[\xa0\u3000]',str(s)):
+     #   return None
+    #elif re.findall('[[\u4e00-\u9fa5]{0,25}公司]',str(s)):
+        #return set(s)
+    
+    for i in range(len(s)):
+        s[i] = s[i].replace(' ','')
+
+    com = []
+    for i in s:
+        if re.findall('[\u4e00-\u9fa5][^0-9a-zA-Z_]{0,25}公司',str(i)):
+            com.append(i)
+        if len(set(com)) >2 and len(set(com)) <8:
+                return set(com)
 
 
 
