@@ -193,6 +193,20 @@ def keys(x):
                 return None
             else:
                 return a
+ 
+
+#加载词典
+def load_dict_from_file(filepath):
+    _dict = {}
+    try:
+        with io.open(filepath, 'r',encoding='utf-8') as dict_file:
+            for line in dict_file:
+                (key, value) = line.strip().split(' ') #将原本用空格分开的键和值用冒号分开来，存放在字典中
+                _dict[key] = value
+    except IOError as ioerr:
+        print("文件 %s 不存在" % (filepath))
+    return _dict
+
 
 
 
